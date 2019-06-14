@@ -1,7 +1,7 @@
 # mern-examples
 Simple project examples relating to the `MERN` stack.
-> Not every project will use the full MERN stack. Some may focus on the back-end with node and others the front-end with react. I'll make a
-note of the used tech in the associated readme for each.
+> Not every project will use the full MERN stack. Some may focus on the back-end with node and others the front-end with react. I'll 
+attempt to make a note of the used tech in the associated readme for each.
 
 
 Basically, a collection of tutorial projects I have covered. I'll link sources where applicable, and set it up in a way that allows me to 
@@ -12,14 +12,15 @@ modules need to be connected in order for the code to function as intended.
 
 I'm using `Atom`, `Bash`, and the `Node.js REPL Terminal` for the most part.
 
-- [Node](https://nodejs.org/en/)
-- [Express]
-- [MongoDB]
-- [React]
-- [Docker]
+### TECH DOCS
+- [Node](https://nodejs.org/en/docs/)
+- [Express](http://expressjs.com/)
+- [MongoDB](https://docs.mongodb.com/)
+- [React](https://reactjs.org/docs/)
+- [Docker](https://docs.docker.com/)
 
-
+### TOOLS
 - [Atom](https://atom.io/)
-- [Postman]
-- [Webstorm]
-- [WSL]
+- [Postman](https://learning.getpostman.com/)
+- [Webstorm](https://www.jetbrains.com/webstorm/)
+- [WSL](https://docs.microsoft.com/en-us/windows/wsl/faq)
