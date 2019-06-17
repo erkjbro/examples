@@ -20,7 +20,7 @@ I'm using `Atom`, `Bash`, and the `Node.js REPL Terminal` for the most part.
 - [Docker](https://docs.docker.com/)
 
 ### TOOLS
-- [Atom](https://atom.io/)
+- [VSCode](https://code.visualstudio.com/)
 - [Postman](https://learning.getpostman.com/)
 - [Webstorm](https://www.jetbrains.com/webstorm/)
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/faq)
