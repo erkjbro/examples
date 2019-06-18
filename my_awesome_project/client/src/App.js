@@ -33,7 +33,7 @@ class App extends Component {
       <div>
         <h1>Testing API Connection...</h1>
         <p><b>API RESPONSE =</b> {this.state.apiResponse}</p>
-        <p><b>DB RESPONE =</b> {this.state.dbResponse}</p>
+        <p><b>DB RESPONSE =</b> {this.state.dbResponse}</p>
       </div>
     );
   }
