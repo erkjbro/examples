@@ -1,7 +1,7 @@
 version: "2"
 services:
     client:
-        image: ebrown0989/mern-app:client
+        image: erkjbro/mern-app:client
         restart: always
         ports:
             - "3000:3000"
@@ -14,7 +14,7 @@ services:
         networks:
             - webapp_net
     api:
-        image: ebrown0989/mern-app:api
+        image: erkjbro/mern-app:api
         restart: always
         ports:
             - "9000:9000"
