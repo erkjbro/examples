@@ -12,8 +12,8 @@ hold the api url
 ### [Create a full stack MERN app using Docker](https://www.freecodecamp.org/news/create-a-fullstack-react-express-mongodb-app-using-docker-c3e3e21c4074/)
 
 - NOT DONE YET!
-- containerize the client
-- containerize the api
-- add a mongodb database
-- create a shared network for these containers
-- etc...
+- add a mongodb database using the mongo image
+
+- ISSUE: I have mongodb installed with Ubuntu on WSL, but there seems to be a problem with 
+file system access that causes errors when running `docker-compose up` to get the containers 
+running. I believe this will be fixed when `WSL 2` and the updated version of `Docker Desktop` are both released.
