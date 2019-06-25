@@ -1,0 +1,7 @@
+{
+  "name": "mern-comment-box",
+  "version": "1.0.0",
+  "description": "MERN Comment Box Tutorial",
+  "main": "index.js",
+  "license": "MIT"
+}
