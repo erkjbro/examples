@@ -28,3 +28,4 @@ I'm using `Atom`, `Bash`, and the `Node.js REPL Terminal` for the most part.
 ### PROJECT SOURCES
 
 - [Complete(?) NodeJS Project Setup from Docker to Testing](https://medium.com/@nur_islam/complete-node-js-project-setup-from-docker-to-testing-docker-restfull-apis-with-node-js-9f384e06734a)
+- [Facebook Comment Box Tutorial (2018)](https://medium.com/@bryantheastronaut/ok-here-we-go-b9f683c5a00c)
