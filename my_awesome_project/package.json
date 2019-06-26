@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd api && yarn start\" \"cd client && yarn start\""},
+    "start": "concurrently \"cd api && yarn start\" \"cd client && yarn start\""
+  },
   "license": "MIT",
   "dependencies": {
     "concurrently": "^4.1.0"
