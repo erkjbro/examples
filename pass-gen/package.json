@@ -1,0 +1,19 @@
+{
+  "name": "pass-gen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:server": "nodemon index.js",
+    "start:client": "cd client && yarn start",
+    "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\""
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "password-generator": "^2.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "nodemon": "^1.19.1"
+  }
+}
