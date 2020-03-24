@@ -7,6 +7,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^5.1.0"
   }
 }

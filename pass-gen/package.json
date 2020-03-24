@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "password-generator": "^2.2.0"
+    "password-generator": "^2.2.3"
   },
   "devDependencies": {
-    "concurrently": "^4.1.1",
-    "nodemon": "^1.19.1"
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
   }
 }
