@@ -1,7 +1,8 @@
-import { CommonRoutesConfig } from '../common/common.routes.config';
 import express from 'express';
 
-class UserRoutes extends CommonRoutesConfig {
+import { CommonRoutesConfig } from '../common/common.routes.config';
+
+class UsersRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'UsersRoutes');
   }
@@ -46,4 +47,4 @@ class UserRoutes extends CommonRoutesConfig {
   }
 }
 
-export { UserRoutes };
+export { UsersRoutes };
