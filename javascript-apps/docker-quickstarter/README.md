@@ -1,7 +1,3 @@
 # Quickstarter
 
-> Deprecated?
-
-I don't remember where I found this example.
-It's over two years old so keep that in mind as you review this as a
-potential reference.
+- [Complete(?) NodeJS Project Setup from Docker to Testing](https://medium.com/@nur_islam/complete-node-js-project-setup-from-docker-to-testing-docker-restfull-apis-with-node-js-9f384e06734a)
