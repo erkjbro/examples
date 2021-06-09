@@ -47,6 +47,12 @@ class UsersDao {
     return this.User.findOne({ email }).exec();
   }
 
+  async getUserByEmailWithPassword(email: string) {
+    return this.User.findOne({ email })
+      .select('_id email permissonFlags +password')
+      .exec();
+  }
+
   async getUserById(userId: string) {
     return this.User.findOne({ _id: userId }).populate('User').exec();
   }
