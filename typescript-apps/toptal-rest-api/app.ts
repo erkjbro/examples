@@ -8,6 +8,7 @@ import debug from 'debug';
 import dotenv from 'dotenv';
 
 import { CommonRoutesConfig } from './common/common.routes.config';
+import { AuthRoutes } from './auth/auth.routes.config';
 import { UsersRoutes } from './users/users.routes.config';
 
 const dotenvResult = dotenv.config();
@@ -41,6 +42,8 @@ if (!process.env.DEBUG) {
 
 app.use(expressWinston.logger(loggerOptions));
 
+// Register Routes
+routes.push(new AuthRoutes(app));
 routes.push(new UsersRoutes(app));
 
 const runningMessage = `Server running at http://localhost:${port}`;
