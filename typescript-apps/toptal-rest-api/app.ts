@@ -7,15 +7,15 @@ import cors from 'cors';
 import debug from 'debug';
 import dotenv from 'dotenv';
 
-import { CommonRoutesConfig } from './common/common.routes.config';
-import { AuthRoutes } from './auth/auth.routes.config';
-import { UsersRoutes } from './users/users.routes.config';
-
 const dotenvResult = dotenv.config();
 
 if (dotenvResult.error) {
   throw dotenvResult.error;
 }
+
+import { CommonRoutesConfig } from './common/common.routes.config';
+import { AuthRoutes } from './auth/auth.routes.config';
+import { UsersRoutes } from './users/users.routes.config';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
@@ -42,7 +42,7 @@ if (!process.env.DEBUG) {
 
 app.use(expressWinston.logger(loggerOptions));
 
-// Register Routes
+// Registered Routes
 routes.push(new AuthRoutes(app));
 routes.push(new UsersRoutes(app));
 

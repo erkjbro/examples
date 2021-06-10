@@ -12,7 +12,8 @@ const tokenExpirationInSeconds = 36000;
 class AuthController {
   async createJWT(req: express.Request, res: express.Response) {
     try {
-      const refreshId = (req.body.userId = jwtSecret);
+      const refreshId = req.body.userId + jwtSecret;
+
       const salt = crypto.createSecretKey(crypto.randomBytes(16));
 
       const hash = crypto
@@ -28,6 +29,7 @@ class AuthController {
 
       return res.status(201).send({ accessToken: token, refreshToken: hash });
     } catch (err) {
+      console.log('key', jwtSecret);
       log('createJWT error: %0', err);
       return res.status(500).send();
     }
