@@ -2,10 +2,12 @@ import express from 'express';
 import { body } from 'express-validator';
 
 import { CommonRoutesConfig } from '../common/common.routes.config';
+import { PermissionFlag } from '../common/middleware/common.permissionflag.enum';
+import permissionMiddleware from '../common/middleware/common.permission.middleware';
+import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
 import UsersController from './controllers/users.controller';
 import UsersMiddleware from './middleware/users.middleware';
-import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
-import bodyValidationMiddleware from '../common/middleware/body.validation.middleware';
+import jwtMiddleware from '../auth/middleware/jwt.middleware';
 
 class UsersRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -15,7 +17,13 @@ class UsersRoutes extends CommonRoutesConfig {
   configureRoutes() {
     this.app
       .route(`/users`)
-      .get(UsersController.listUsers)
+      .get(
+        jwtMiddleware.validJWTNeeded,
+        permissionMiddleware.permissionFlagRequired(
+          PermissionFlag.ADMIN_PERMISSION
+        ),
+        UsersController.listUsers
+      )
       .post(
         body('email').isEmail(),
 
@@ -32,7 +40,11 @@ class UsersRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`/users/:userId`)
-      .all(UsersMiddleware.validateUserExists)
+      .all(
+        UsersMiddleware.validateUserExists,
+        jwtMiddleware.validJWTNeeded,
+        permissionMiddleware.onlySameUserOrAdminCanDoThisAction
+      )
       .get(UsersController.getUserById)
       .delete(UsersController.removeUser);
 
@@ -49,6 +61,10 @@ class UsersRoutes extends CommonRoutesConfig {
 
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validateSameEmailBelongToSameUser,
+      UsersMiddleware.userCantChangePermission,
+      permissionMiddleware.permissionFlagRequired(
+        PermissionFlag.PAID_PERMISSION
+      ),
       UsersController.put,
     ]);
 
@@ -66,6 +82,10 @@ class UsersRoutes extends CommonRoutesConfig {
 
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validatePatchEmail,
+      UsersMiddleware.userCantChangePermission,
+      permissionMiddleware.permissionFlagRequired(
+        PermissionFlag.PAID_PERMISSION
+      ),
       UsersController.patch,
     ]);
 
