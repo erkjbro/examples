@@ -73,7 +73,7 @@ describe('Users and Auth Endpoints', function () {
     it('should allow a GET from /users', async function () {
       const res = await request
         .get(`/users`)
-        .set({ Authorzation: `Bearer ${accessToken}` })
+        .set({ Authorization: `Bearer ${accessToken}` })
         .send();
 
       expect(res.status).to.equal(403);
@@ -105,7 +105,7 @@ describe('Users and Auth Endpoints', function () {
       expect(res.status).to.equal(404);
     });
 
-    it.skip('should disallow a PUT to /users/:userId tryong to change the permission flags', async function () {
+    it('should disallow a PUT to /users/:userId trying to change the permission flags', async function () {
       const res = await request
         .put(`/users/${firstUserIdTest}`)
         .set({ Authorization: `Bearer ${accessToken}` })
@@ -114,7 +114,7 @@ describe('Users and Auth Endpoints', function () {
           password: firstUserBody.password,
           firstName: 'Peter',
           lastName: 'Piper',
-          permissionFlag: 256,
+          permissionFlags: 256,
         });
 
       expect(res.status).to.equal(400);
