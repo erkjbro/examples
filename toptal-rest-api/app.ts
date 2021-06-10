@@ -38,6 +38,11 @@ const loggerOptions: expressWinston.LoggerOptions = {
 if (!process.env.DEBUG) {
   // When not debugging, log requests as one-liners.
   loggerOptions.meta = false;
+
+  // Silence Winston during normal test runs.
+  if (typeof global.it === 'function') {
+    loggerOptions.level = 'http'; // for non-debug test runs, squelch entirely
+  }
 }
 
 app.use(expressWinston.logger(loggerOptions));
@@ -51,6 +56,8 @@ const runningMessage = `Server running at http://localhost:${port}`;
 app.get('/', (req: express.Request, res: express.Response) => {
   res.status(200).send(runningMessage);
 });
+
+export default app;
 
 server.listen(port, () => {
   routes.forEach((route: CommonRoutesConfig) => {
