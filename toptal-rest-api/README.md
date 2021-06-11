@@ -16,7 +16,7 @@ These dependencies are required to enable TypeScript for our app’s own code, a
 
 ### Project Structure
 
-The idea behind the project structure’s two folders (`common` and `users`) is to have individual modules that have their own responsibilities.
+The idea behind the project structure’s folders is to have individual modules that have their own responsibilities.
 
 - Route configuration to define the requests our API can handle
 - Services for tasks such as connecting to our database models, doing queries, or connecting to external services that are required by the specific request
