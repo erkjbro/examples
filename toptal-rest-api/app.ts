@@ -6,6 +6,7 @@ import * as expressWinston from 'express-winston';
 import cors from 'cors';
 import debug from 'debug';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
 
 const dotenvResult = dotenv.config();
 
@@ -25,6 +26,12 @@ const debugLog: debug.IDebugger = debug('app');
 
 app.use(express.json());
 app.use(cors());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(helmet());
+  // compression
+  // access log stream
+}
 
 const loggerOptions: expressWinston.LoggerOptions = {
   transports: [new winston.transports.Console()],
