@@ -150,7 +150,7 @@ describe('Users and Auth Endpoints', function () {
         refreshToken = res.body.refreshToken;
       });
 
-      it.skip('should allow a PUT to /users/:userId to change first and last names', async function () {
+      it('should allow a PUT to /users/:userId to change first and last names', async function () {
         const res = await request
           .put(`/users/${firstUserIdTest}`)
           .set({ Authorization: `Bearer ${accessToken}` })
@@ -165,7 +165,7 @@ describe('Users and Auth Endpoints', function () {
         expect(res.status).to.equal(204);
       });
 
-      it.skip('should allow a GET from /users/:userId and should have a new full name', async function () {
+      it('should allow a GET from /users/:userId and should have a new full name', async function () {
         const res = await request
           .get(`/users/${firstUserIdTest}`)
           .set({ Authorization: `Bearer ${accessToken}` })

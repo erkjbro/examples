@@ -29,7 +29,6 @@ class AuthController {
 
       return res.status(201).send({ accessToken: token, refreshToken: hash });
     } catch (err) {
-      console.log('key', jwtSecret);
       log('createJWT error: %0', err);
       return res.status(500).send();
     }
