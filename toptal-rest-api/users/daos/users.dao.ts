@@ -49,7 +49,7 @@ class UsersDao {
 
   async getUserByEmailWithPassword(email: string) {
     return this.User.findOne({ email })
-      .select('_id email permissonFlags +password')
+      .select('_id email permissionFlags +password')
       .exec();
   }
 

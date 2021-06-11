@@ -125,7 +125,7 @@ describe('Users and Auth Endpoints', function () {
       );
     });
 
-    it.skip('should allow a PUT to /users/:uderId/permissionFlags/2 for testing', async function () {
+    it('should allow a PUT to /users/:userId/permissionFlags/2 for testing', async function () {
       const res = await request
         .put(`/users/${firstUserIdTest}/permissionFlags/2`)
         .set({ Authorization: `Bearer ${accessToken}` })
@@ -150,7 +150,7 @@ describe('Users and Auth Endpoints', function () {
         refreshToken = res.body.refreshToken;
       });
 
-      it.skip('should allow a PUT to /users/:userId to chagne first and last names', async function () {
+      it.skip('should allow a PUT to /users/:userId to change first and last names', async function () {
         const res = await request
           .put(`/users/${firstUserIdTest}`)
           .set({ Authorization: `Bearer ${accessToken}` })
