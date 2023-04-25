@@ -15,6 +15,11 @@ import rateLimit from 'express-rate-limit';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import responseTime from 'response-time';
+// For cors
+import cors from 'cors';
+import helmet from 'helmet';
+// For proxying
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 dotenv.config();
 
@@ -56,8 +61,10 @@ app.use(session({
   store
 }));
 
+// Logging response time
 app.use(responseTime());
 
+// Logging
 app.use(expressWinston.logger({
   transports: [ new winston.transports.Console() ],
   format: winston.format.json(),
@@ -67,6 +74,20 @@ app.use(expressWinston.logger({
   expressFormat: true,
   colorize: false,
   ignoreRoute: (req, res) => false
+}));
+
+// Security headers
+app.use(cors());
+app.use(helmet());
+
+// Proxying
+// Test with /search?q=x&format=json
+app.use("/search", createProxyMiddleware({
+  target: "http://api.duckduckgo.com/",
+  changeOrigin: true,
+  pathRewrite: {
+    ["^/search"]: ""
+  }
 }));
 
 // AuthN routes
