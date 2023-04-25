@@ -7,11 +7,19 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(
+  rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 5 // 5 requests,
+  })
+);
 
 const secret = process.env.SESSION_SECRET;
 const store = new session.MemoryStore();
