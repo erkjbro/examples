@@ -4,30 +4,25 @@
  *
  */
 
-// Starting packages
-import dotenv from 'dotenv';
 import express from 'express';
-// For session management
 import session from 'express-session';
-// For rate limiting
 import rateLimit from 'express-rate-limit';
-// For logging
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import responseTime from 'response-time';
-// For cors
 import cors from 'cors';
 import helmet from 'helmet';
-// For proxying
+import * as config from "./config.js";
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
-dotenv.config();
-
 const app = express();
-const port = process.env.PORT || 3000;
-
-const secret = process.env.SESSION_SECRET;
+const port = config.serverPort;
+const secret = config.sessionSecret;
 const store = new session.MemoryStore();
+
+const alwaysAllow = (_1, _2, next) => {
+  next();
+};
 
 // Authentication for session
 const protect = (req, res, next) => {
@@ -45,24 +40,12 @@ const nameQuery = (req, res, next) => {
   res.send(`Hello ${name}!`);
 };
 
-// Rate Limiting
-app.use(
-  rateLimit({
-    windowMs: 5 * 60 * 1000, // 5 minutes
-    max: 5 // 5 requests,
-  })
-);
+app.disable("x-powered-by");
 
-// Session management
-app.use(session({
-  secret,
-  resave: false,
-  saveUninitialized: true,
-  store
-}));
-
-// Logging response time
+app.use(helmet());
+app.use(cors());
 app.use(responseTime());
+app.use(rateLimit(config.rate));
 
 // Logging
 app.use(expressWinston.logger({
@@ -76,19 +59,19 @@ app.use(expressWinston.logger({
   ignoreRoute: (req, res) => false
 }));
 
-// Security headers
-app.use(cors());
-app.use(helmet());
-
-// Proxying
-// Test with /search?q=x&format=json
-app.use("/search", createProxyMiddleware({
-  target: "http://api.duckduckgo.com/",
-  changeOrigin: true,
-  pathRewrite: {
-    ["^/search"]: ""
-  }
+// Session management
+app.use(session({
+  secret,
+  resave: false,
+  saveUninitialized: true,
+  store
 }));
+
+Object.keys(config.proxies).forEach((path) => {
+  const { isProtected, ...options } = config.proxies[path];
+  const check = isProtected ? protect : alwaysAllow;
+  app.use(path, check, createProxyMiddleware(options));
+});
 
 // AuthN routes
 app.get("/login", (req, res) => {
