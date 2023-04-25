@@ -4,26 +4,27 @@
  *
  */
 
+// Starting packages
 import dotenv from 'dotenv';
 import express from 'express';
+// For session management
 import session from 'express-session';
+// For rate limiting
 import rateLimit from 'express-rate-limit';
+// For logging
+import winston from 'winston';
+import expressWinston from 'express-winston';
+import responseTime from 'response-time';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(
-  rateLimit({
-    windowMs: 5 * 60 * 1000, // 5 minutes
-    max: 5 // 5 requests,
-  })
-);
-
 const secret = process.env.SESSION_SECRET;
 const store = new session.MemoryStore();
 
+// Authentication for session
 const protect = (req, res, next) => {
   const { authenticated } = req.session;
 
@@ -34,6 +35,20 @@ const protect = (req, res, next) => {
   }
 };
 
+const nameQuery = (req, res, next) => {
+  const { name = "user" } = req.query;
+  res.send(`Hello ${name}!`);
+};
+
+// Rate Limiting
+app.use(
+  rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 5 // 5 requests,
+  })
+);
+
+// Session management
 app.use(session({
   secret,
   resave: false,
@@ -41,6 +56,20 @@ app.use(session({
   store
 }));
 
+app.use(responseTime());
+
+app.use(expressWinston.logger({
+  transports: [ new winston.transports.Console() ],
+  format: winston.format.json(),
+  statusLevels: true,
+  meta: false,
+  msg: "HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms",
+  expressFormat: true,
+  colorize: false,
+  ignoreRoute: (req, res) => false
+}));
+
+// AuthN routes
 app.get("/login", (req, res) => {
   const { authenticated } = req.session;
 
@@ -58,18 +87,12 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.get("/protected", protect, (req, res) => {
-  const { name = "user" } = req.query;
-  res.send(`Hello ${name}!`);
-});
+// Protected route
+app.get("/protected", protect, nameQuery);
 
-app.get("/", (req, res) => {
-  const { name = "user" } = req.query;
-  res.send(`Hello ${name}!`);
-});
+// Unprotected route
+app.get("/", nameQuery);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-// Navigate to http://localhost:3000/?name=King to see the result.
