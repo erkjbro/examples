@@ -1,29 +1,31 @@
-# mern-examples
+# Snippets
 
-Simple project examples relating to the `MERN` stack.
+Code examples, mostly related to the `Node.js` & `React`. Heavily focuses on `MongoDB` as well.
 
-> Not every project will use the full MERN stack.
-> Some may focus on the back-end with node and others the front-end with react.
-> I'll attempt to make a note of the used tech in the associated readme for each.
+Basically, a collection of tutorials and examples I have covered, sometimes with my own edits. Check the `README` files
+for more details in each directory and project.
 
-Basically, a collection of tutorial projects I have covered. I'll link sources where applicable,
-and set it up in a way that allows me to better review application examples for later reference.
-
-Comments are included in code examples to demonstrate how I tested it. I'll also point out dependencies,
-in case either data files or modules need to be connected in order for the code to function as intended.
-
-I'm using `VSCode`, `WSL2 & Ubuntu`, `Postman`, `MongoDB Compass`, & `Docker Desktop`.
+Comments are included in each file to demonstrate how I went about testing and learning the code.
 
 ### TECH DOCS
 
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [TypeScript](https://www.typescriptlang.org/docs/home.html)
 - [Node](https://nodejs.org/en/docs/)
 - [Express](http://expressjs.com/)
 - [MongoDB](https://docs.mongodb.com/)
 - [React](https://reactjs.org/docs/)
-- [Docker](https://docs.docker.com/)
+- [Redux](https://redux.js.org/)
 
 ### TOOLS
 
+- [Git](https://git-scm.com/doc)
 - [VSCode](https://code.visualstudio.com/)
+- [WebStorm](https://www.jetbrains.com/webstorm/)
+- [PyCharm](https://www.jetbrains.com/pycharm/)
+- [DataGrip](https://www.jetbrains.com/datagrip/)
 - [Postman](https://learning.getpostman.com/)
+- [Docker](https://docs.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/faq)
+- [Ubuntu](https://help.ubuntu.com/)
