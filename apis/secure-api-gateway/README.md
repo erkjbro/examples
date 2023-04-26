@@ -1,6 +1,6 @@
-# Snyk API Gateway
+# Secure API Gateway
 
-Source: [How to build a secure API gateway in Node.js](https://snyk.io/blog/how-to-build-secure-api-gateway-node-js/)
+Source: Snyk Blog - [How to build a secure API gateway in Node.js](https://snyk.io/blog/how-to-build-secure-api-gateway-node-js/)
 Author: Florian Rappl
 
 ## Getting Started
