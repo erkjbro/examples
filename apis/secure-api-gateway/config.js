@@ -2,7 +2,12 @@ import dotenv from 'dotenv';
 import winston from 'winston';
 import session from 'express-session';
 
-dotenv.config();
+const dotenvResult = dotenv.config();
+
+if (dotenvResult.error) {
+  console.error('Issue with .env file');
+  throw dotenvResult.error;
+}
 
 const store = new session.MemoryStore();
 
