@@ -4,6 +4,8 @@
 
 ## [Data Entry](data-entry/README.md)
 
-## [Docker Project](docker-project/README.md)
+## [Event Posting](event-posting/README.md)
 
-## [Docker Quickstart](docker-quickstart/README.md)
+## [MERN Quickstart](mern-quickstart/README.md)
+
+## [MERN Skeleton](mern-skeleton/README.md)

@@ -1,5 +1,5 @@
 {
-  "name": "quickstarter",
+  "name": "mern-quickstart",
   "version": "1.0.0",
   "description": "complete node project setup from docker to testing [Docker, RESTfull APIs with Node, Express, MongoDB, Integration Testing with JEST ]",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "author": "Erik J Brown",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
