@@ -1,7 +1,7 @@
 {
   "name": "mern-quickstart",
   "version": "1.0.0",
-  "description": "complete node project setup from docker to testing [Docker, RESTfull APIs with Node, Express, MongoDB, Integration Testing with JEST ]",
+  "description": "complete node project setup from docker to testing [Docker, REST APIs with Node, Express, & MongoDB ]",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",

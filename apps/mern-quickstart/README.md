@@ -11,13 +11,12 @@ A simple project with Node.js + Express.js + MongoDB + JEST Integration Testing 
 
 ## Getting Started
 
+Install Docker and a bunch of stuff. 
+
 From project root:
 
 ```bash
-# Example for steps to get started
-echo PORT=3000 >> .env
-npm ci
-npm start
+docker compose up
 ```
 
 Once started, the server will run at http://localhost:<PORT> by default.
@@ -40,11 +39,17 @@ Once started, the server will run at http://localhost:<PORT> by default.
 ## Routes
 
 ### Public
-- '/' (GET)
+- '/test' (GET)
+- '/register' (POST) Expects a JSON body with the following fields:
+  - `name`: String
+  - `email`: String
+  - `password`: String
 
-### Protected
-- '/api' (GET)
+### Private
+
+none
 
 ## Extra
 
-> Any extra information, such as notes or suggestions for future development, goes here.
+App is currently using CJS instead of ESM.
+Volume mounting for hot reloading would be useful.
