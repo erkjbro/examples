@@ -1,0 +1,41 @@
+version: "3"
+services:
+    client:
+        image: erkjbro/mern-app:client
+        restart: always
+        ports:
+            - "3000:3000"
+        working_dir: /client/src/app
+        volumes:
+            - ./client:/usr/src/client/src/app
+        entrypoint: ["npm", "start"]
+        links:
+            - api
+        networks:
+            - webapp_net
+    api:
+        image: erkjbro/mern-app:api
+        restart: always
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./api:/usr/src/api
+            - /api/node_modules
+        depends_on:
+            - mongodb
+        networks:
+            - webapp_net
+    mongodb:
+        image: mongo
+        restart: unless-stopped
+        container_name: mongodb
+        volumes:
+            - ./data-node:/data/db
+        ports:
+            - "27017:27017"
+        command: mongod --noauth --smallfiles
+        networks:
+            - webapp_net
+networks:
+    webapp_net:
+        driver: bridge
