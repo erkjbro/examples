@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV === 'test') {
-	module.exports = require('./keys_test');
-} else {
-	module.exports = require('./keys_dev');
-}
+import { keys as testKeys } from './keys_test.js';
+import { keys as devKeys } from './keys_dev.js';
 
+const keys = process.env.NODE_ENV === 'test' ? testKeys : devKeys;
+
+export { keys };

@@ -57,5 +57,6 @@ none
 
 ## Extra
 
-App is currently using CJS instead of ESM.
-Volume mounting for hot reloading would be useful.
+- Redis caching would be a nice addition to this project.
+- No Nginx usage present, but would be nice to see as well.
+- Volume mounting and environment variables reliance could be improved upon.

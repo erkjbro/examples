@@ -1,7 +1,8 @@
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
-exports.testUserRoute = (req, res) => {
+import { User } from '../models/User.js';
+
+export const testUserRoute = (req, res) => {
   console.log('(GET) Test user route');
   return res.json({
     message: 'Route Tested Successfully',
@@ -10,7 +11,7 @@ exports.testUserRoute = (req, res) => {
   });
 };
 
-exports.registerNewUser = async (req, res) => {
+export const registerNewUser = async (req, res) => {
   console.log('(POST) Register new user route');
 
   const { name, email, password } = req.body;

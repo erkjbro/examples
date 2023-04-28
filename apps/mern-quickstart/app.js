@@ -1,35 +1,44 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 
-// initializing routes
-const users = require('./routes/user');
+import { userRouter } from './routes/user.js';
+import { keys } from './config/keys.js';
 
 const app = express();
 
-const PORT = process.env.PORT || 8082;
+app.set('port', Number(process.env.PORT || 8082));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// DB config
-const db = require('./config/keys').mongoURI;
+const db_uri = keys.mongoURI;
 
 const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  connectTimeoutMS: 1000
 };
 
 // Connect to MongoDB
-mongoose
-  .connect(db, mongooseOptions)
-  .then(() => console.log('Quickstart MongoDB Connected'))
-  .catch((err) => console.error(err));
+try {
+  await mongoose.connect(db_uri, mongooseOptions);
+  console.log('Quickstart MongoDB connected.');
+} catch (err) {
+  console.log(err);
+  process.exit(1);
+}
 
 // Configure Routes
-app.use('/api/users', users);
+app.use('/api/users', userRouter);
 app.use((req, res, next) => res.status(404).send('Not a valid route...'));
 
-app.listen(PORT, () => console.log(`Quickstart Server is running on port ${PORT}`));
+app.listen(app.get('port'), () => (
+  console.log(
+    `Quickstart Server is running on port %d in %s mode.`,
+    app.get('port'),
+    app.get('env')
+  )
+));

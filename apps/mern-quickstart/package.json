@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "Complete REST API project setup with Docker, Node, Express, & MongoDB",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",

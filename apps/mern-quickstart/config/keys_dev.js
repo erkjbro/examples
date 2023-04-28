@@ -1,3 +1,3 @@
-module.exports = {
-	mongoURI: 'mongodb://mongo:27017/quickstarter-mongo'
+export const keys = {
+	mongoURI: 'mongodb://mongo:27017/quickstart-mongo'
 };

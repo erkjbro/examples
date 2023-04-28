@@ -1,16 +1,17 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
 
-const { registerNewUser, testUserRoute } = require('../controllers/user');
+import { registerNewUser, testUserRoute } from '../controllers/user.js';
+
+const userRouter = express.Router();
 
 // @route GET api/users/test
 // @description tests users route
 // @access Public
-router.get('/test', testUserRoute);
+userRouter.get('/test', testUserRoute);
 
 // @route POST api/users/register
 // @description Register user
 // @access Public
-router.post('/register', registerNewUser);
+userRouter.post('/register', registerNewUser);
 
-module.exports = router;
+export { userRouter };
