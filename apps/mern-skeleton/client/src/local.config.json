@@ -1,7 +1,0 @@
-{
-    "config" : {
-        "api_config": {
-            "host_url": "http://localhost:9000"
-        }
-    }
-}
