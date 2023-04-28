@@ -1,11 +1,18 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
-exports.testUserRoute = (req, res) => (
-  res.json({ msg: 'users route works' })
-);
+exports.testUserRoute = (req, res) => {
+  console.log('(GET) Test user route');
+  return res.json({
+    message: 'Route Tested Successfully',
+    error: false,
+    payload: null
+  });
+};
 
 exports.registerNewUser = async (req, res) => {
+  console.log('(POST) Register new user route');
+
   const { name, email, password } = req.body;
 
   const user = await User.findOne({ email });

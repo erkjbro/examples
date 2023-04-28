@@ -1,5 +1,7 @@
 FROM node:current-alpine AS build
 
+ENV PORT 8082
+
 WORKDIR /usr/src/app
 
 COPY package*.json .
@@ -10,4 +12,4 @@ COPY . .
 
 EXPOSE 8082
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
