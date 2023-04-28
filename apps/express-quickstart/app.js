@@ -31,6 +31,16 @@ try {
   process.exit(1);
 }
 
+// If there is a connection error, send an error message.
+mongoose.connection.on("error", (error) => {
+  console.error("Database connection error:", error);
+});
+
+// If connected to MongoDB sends a success message.
+mongoose.connection.once("open", () => {
+  console.log("Connected to Database!");
+});
+
 // Configure Routes
 app.use('/api/users', userRouter);
 app.use((req, res, next) => res.status(404).send('Not a valid route...'));
