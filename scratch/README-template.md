@@ -3,11 +3,11 @@
 Source: <org> - [<article_name>](https://example.com)
 Author: <author>
 
->> Give a brief description
+> Give a brief description
 
 ## Comments
 
->> What did you like about this project? What did you dislike? Did you learn anything from it?
+> What did you like about this project? What did you dislike? Did you learn anything from it?
 
 ## Getting Started
 
