@@ -1,10 +1,10 @@
 services:
-#  frontend:
-#    build:
-#      context: "./frontend/events"
-#      dockerfile: "./Dockerfile"
-#    networks:
-#      - events_net
+  frontend:
+    build:
+      context: "./frontend"
+      dockerfile: "./Dockerfile"
+    networks:
+      - events_net
   backend:
     build:
       context: "./backend"

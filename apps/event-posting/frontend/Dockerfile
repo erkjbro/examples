@@ -7,58 +7,76 @@
 ARG NODE_VERSION=lts
 
 # Base on offical Node.js Alpine image
-FROM node:${NODE_VERSION}-alpine AS builder
+FROM node:${NODE_VERSION}-alpine AS base
 
-# Use production node environment by default.
-#ENV NODE_ENV production
+LABEL authors="Erik"
+
+
+FROM base AS deps
 
 # Set working directory
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
-COPY package*.json .
+COPY package.json package-lock.json* yarn.lock* ./
 
 # Install dependencies
-RUN npm ci --omit=dev
+RUN \
+    if [ -f package-lock.json ]; then npm ci --omit=dev; \
+    elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
+
+
+FROM base AS builder
+
+# Set working directory
+WORKDIR /usr/src/app
 
 # Copy all files
+COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY . .
 
 # Build app
 RUN npm run build
 
 
-FROM node:${NODE_VERSION}-alpine AS runner
+FROM base AS runner
 
+# Set working directory
 WORKDIR /usr/src/app
+
+# Use production node environment by default.
+ENV NODE_ENV production
+
+# Uncomment the following line in case you want to disable telemetry during runtime.
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Add nextjs user and group
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
 # Install PM2 globally
 RUN npm install --global pm2
 
-COPY --from=builder /usr/src/app/package*.json .
-COPY --from=builder /usr/src/app/next.config.js .
-COPY --from=builder /usr/src/app/public ./public
-COPY --from=builder /usr/src/app/.next/standalone .
-COPY --from=builder /usr/src/app/.next/static ./.next/static
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder  /usr/src/app/package*.json .
+COPY --from=builder  /usr/src/app/next.config.js .
+COPY --from=builder  /usr/src/app/public ./public
+
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/static ./.next/static
+
+# Run container as non-root (unprivileged) user
+# A node user is also provided in the Node.js Alpine base image
+USER nextjs
 
 # Expose the listening port
 EXPOSE 3000
 
-# Run container as non-root (unprivileged) user
-# The node user is provided in the Node.js Alpine base image
-USER node
+ENV PORT 3000
 
 # Run npm start script with PM2 when container starts
 ENTRYPOINT ["pm2-runtime", "server.js"]
-
-
-#FROM nginx:stable-alpine
-#
-## Remove any existing config files
-#RUN rm /etc/nginx/conf.d/*
-#
-#COPY nginx.conf /etc/nginx/nginx.conf
-#COPY --from=builder /usr/src/app/.next/static /usr/share/nginx/html
-#
-#EXPOSE 80
