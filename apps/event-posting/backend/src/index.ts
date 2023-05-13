@@ -3,4 +3,4 @@ import dotenv from 'dotenv';
 import { APIServer } from './api-server';
 
 dotenv.config();
-await APIServer.start();
+APIServer.start().then(() => console.log('running'));

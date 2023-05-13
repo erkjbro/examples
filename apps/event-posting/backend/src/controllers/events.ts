@@ -1,5 +1,6 @@
 import { GET, Path, POST } from 'typescript-rest';
-import Event, { EventDoc } from '../models/events';
+
+import Event, { type EventDoc } from '../models/events';
 
 @Path('/api/events')
 export class EventsController {
