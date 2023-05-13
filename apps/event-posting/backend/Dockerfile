@@ -4,14 +4,18 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/engine/reference/builder/
 
+# Set the Node.js version to the latest stable release
 ARG NODE_VERSION=lts
 
 # Base on offical Node.js Alpine image
 FROM node:${NODE_VERSION}-alpine AS base
 
-LABEL authors="Erik"
+# Setting image metadata
+LABEL authors="Erik Brown <erkjbro@erikjbrown.tech>"
+LABEL version="1.0.0"
+LABEL description="Event Posting Backend"
 
-
+# Dependency Stage
 FROM base AS deps
 
 # Set working directory
@@ -28,7 +32,7 @@ RUN \
     else echo "Lockfile not found." && exit 1; \
     fi
 
-
+# Build Stage
 FROM base AS builder
 
 # Set working directory
@@ -41,7 +45,7 @@ COPY . .
 # Build app
 RUN npm run build
 
-
+# Run Stage
 FROM base AS runner
 
 # Set working directory
@@ -51,7 +55,7 @@ WORKDIR /app
 ENV NODE_ENV production
 
 # Install PM2 globally
-#RUN npm install --global pm2
+RUN npm install --global pm2
 
 COPY package.json package-lock.json ./
 COPY .env.production ./.env
@@ -69,4 +73,5 @@ EXPOSE 8000
 ENV PORT 8000
 
 # Run npm start script with PM2 when container starts
-CMD [ "node", "src/index.js"]
+#CMD [ "pm2-runtime", "ecosystem.config.js" ]
+CMD [ "node", "--experimental-modules", "--es-module-specifier-resolution=node", "src/index.js"]

@@ -1,4 +1,5 @@
 import * as chai from 'chai';
+// @ts-ignore
 import dotenv from 'dotenv';
 import { after, before, describe, it } from 'mocha';
 import { type CoreOptions, defaults, type Request, type RequestAPI, type RequiredUriUrl } from 'request';

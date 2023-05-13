@@ -19,12 +19,11 @@ From project root:
 
 ```bash
 # Example for steps to get started
-echo PORT=3000 >> .env
-npm ci
-npm start
+docker compose build
+docker compose up -d
 ```
 
-Once started, the server will run at http://localhost:<PORT> by default.
+Once started, the server will run at http://localhost:80 by default.
 
 ## Environment Variables
 
@@ -38,11 +37,12 @@ Once started, the server will run at http://localhost:<PORT> by default.
 
 ## Routes
 
-### Public
-- '/' (GET)
+> Note: Nginx proxy is used to route requests to the appropriate service.
 
-### Protected
-- '/api' (GET)
+### Public
+- '/' (GET) - Frontend
+- '/api/events' (GET) - Backend - Get All Events
+- '/api/events' (POST) - Backend - Create New Event
 
 ## Extra
 

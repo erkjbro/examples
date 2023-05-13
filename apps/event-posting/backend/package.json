@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "build": "npx tsc",
-    "prestart": "npx tsc",
-    "start": "node dist/src/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node dist/src/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q --experimental-modules --es-module-specifier-resolution=node dist/src/index.js\"",
     "test": "cross-env NODE_ENV=test mocha --exit dist/test/**.js",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' 'test/**/*.{js,ts,tsx}' --fix",
     "lint:test": "eslint \"{src,apps,libs,test}/**/*.ts\""
