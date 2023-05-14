@@ -5,11 +5,10 @@ import session from 'express-session';
 const dotenvResult = dotenv.config();
 
 if (dotenvResult.error) {
-  console.error('Issue with .env file');
-  throw dotenvResult.error;
+  console.error('Issue when trying to load config from .env file');
 }
 
-const store = new session.MemoryStore();
+const memoryStore = new session.MemoryStore();
 
 export const serverPort = process.env.PORT || 3000;
 export const sessionSecret = process.env.SESSION_SECRET || 'super_secret_string';
@@ -34,7 +33,7 @@ export const sessionOptions = {
   secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
-  store,
+  store: memoryStore, // For production, cookie store or redis store recommended?
 }
 
 export const proxies = {

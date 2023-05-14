@@ -13,7 +13,7 @@ import helmet from 'helmet';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
 import * as config from './config.js';
-import { alwaysAllow, mustProtect, nameQuery, login, logout } from './helpers.js';
+import { alwaysAllow, login, logout, mustProtect, nameQuery } from './helpers.js';
 
 const app = express();
 const port = config.serverPort;
@@ -55,6 +55,13 @@ app.get('/logout', logout);
 app.get('/protected', mustProtect, nameQuery);
 // Unprotected route
 app.get('/', nameQuery);
+
+app.use((req, res, next) => {
+  if (!req.session) {
+    return next(new Error('Oh no')); //handle error
+  }
+  next(); //otherwise continue
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
