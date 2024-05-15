@@ -1,4 +1,5 @@
-import {ChatCompletionMessageParam} from "openai/resources";
+// @ts-ignore
+import { ChatCompletionMessageParam } from 'openai/resources';
 
 export const messages: ChatCompletionMessageParam[] = [
     {

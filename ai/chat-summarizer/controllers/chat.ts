@@ -1,6 +1,8 @@
 import { OpenAIClient } from "../apis";
+// @ts-ignore
+import type { ChatCompletionMessageParam } from 'openai/resources';
 
-export const summarizeChat = async (messages) => {
+export const summarizeChat = async (messages: ChatCompletionMessageParam[]) => {
     const client = new OpenAIClient();
     const summary = await client.getChatSummary(messages);
 
