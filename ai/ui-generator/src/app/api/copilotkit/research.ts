@@ -3,11 +3,11 @@
  *
  * https://github.com/assafelovic/gpt-newspaper
  */
-import {HumanMessage, SystemMessage} from '@langchain/core/messages';
-import {ChatOpenAI} from '@langchain/openai';
-import {END, StateGraph} from '@langchain/langgraph';
-import {RunnableLambda} from '@langchain/core/runnables';
-import {TavilySearchAPIRetriever} from '@langchain/community/retrievers/tavily_search_api';
+import { HumanMessage, SystemMessage } from '@langchain/core/messages';
+import { ChatOpenAI } from '@langchain/openai';
+import { END, StateGraph } from '@langchain/langgraph';
+import { RunnableLambda } from '@langchain/core/runnables';
+import { TavilySearchAPIRetriever } from '@langchain/community/retrievers/tavily_search_api';
 
 interface AgentState {
     topic: string;
@@ -19,7 +19,7 @@ interface AgentState {
 function model() {
     return new ChatOpenAI({
         temperature: 0,
-        modelName: 'gpt-4-1106-preview',
+        modelName: 'gpt-3.5-turbo',
     });
 }
 
@@ -133,7 +133,7 @@ async function write(state: {
             )
         ),
         new HumanMessage(
-            `Today's date is ${new Date().toLocaleDateString('en-GB')}.
+            `Today's date is ${new Date().toLocaleDateString('en-US')}.
       Your task is to write a critically acclaimed article for me about the provided query or 
       topic based on the sources. 
       Here is a list of articles: ${state.agentState.searchResults}
@@ -188,7 +188,6 @@ const agentState = {
     },
 };
 
-// Define the function that determines whether to continue or not
 const shouldContinue = (state: { agentState: AgentState }) => {
     return state.agentState.critique === undefined ? 'end' : 'continue';
 };
@@ -197,11 +196,11 @@ const workflow = new StateGraph({
     channels: agentState,
 });
 
-workflow.addNode('search', new RunnableLambda({ func: search }) as any);
-workflow.addNode('curate', new RunnableLambda({ func: curate }) as any);
-workflow.addNode('write', new RunnableLambda({ func: write }) as any);
-workflow.addNode('critique', new RunnableLambda({ func: critique }) as any);
-workflow.addNode('revise', new RunnableLambda({ func: revise }) as any);
+workflow.addNode('search', new RunnableLambda({func: search}) as any);
+workflow.addNode('curate', new RunnableLambda({func: curate}) as any);
+workflow.addNode('write', new RunnableLambda({func: write}) as any);
+workflow.addNode('critique', new RunnableLambda({func: critique}) as any);
+workflow.addNode('revise', new RunnableLambda({func: revise}) as any);
 
 workflow.addEdge('search', 'curate');
 workflow.addEdge('curate', 'write');
@@ -229,8 +228,8 @@ workflow.addConditionalEdges(
 );
 
 workflow.addEdge('revise', 'critique');
-
 workflow.setEntryPoint('search');
+
 const app = workflow.compile();
 
 export async function researchWithLangGraph(topic: string) {
