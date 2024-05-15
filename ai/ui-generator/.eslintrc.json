@@ -1,8 +1,94 @@
 {
-  "extends": "next/core-web-vitals",
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jasmine": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "rules": {
-    "comma-dangle": ["warn", "never"],
-    "trailing-commas": "off",
-    "quotes": ["warn", "single"]
+    "class-methods-use-this": "off",
+    "comma-dangle": [
+      "warn",
+      "never"
+    ],
+    "dot-notation": "off",
+    "default-param-last": "off",
+    "function-paren-newline": "error",
+    "import/export": "off",
+    "import/no-cycle": "off",
+    "import/no-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/order": "off",
+    "import/prefer-default-export": "off",
+    "max-len": [
+      "warn",
+      180
+    ],
+    "new-cap": "off",
+    "no-bitwise": "off",
+    "no-console": "off",
+    "no-extra-boolean-cast": "warn",
+    "no-invalid-this": "warn",
+    "no-param-reassign": "off",
+    "no-promise-executor-return": "off",
+    "no-restricted-syntax": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "nonblock-statement-body-position": "off",
+    "operator-linebreak": "off",
+    "space-infix-ops": "off",
+    "chai-friendly/no-unused-expressions": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/control-has-associated-label": "warn",
+    "jsx-a11y/interactive-supports-focus": "off",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/destructuring-assignment": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-useless-fragment": "error",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-access-state-in-setstate": "error",
+    "react/no-array-index-key": "off",
+    "react/no-danger": "off",
+    "react/no-find-dom-node": "off",
+    "react/no-string-refs": "off",
+    "react/no-unused-prop-types": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react/sort-comp": "off",
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "off",
+    "security/detect-non-literal-fs-filename": "off",
+    "security/detect-object-injection": "off",
+    "security/detect-unsafe-regex": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/indent": "warn",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/method-signature-style": [
+      "error",
+      "property"
+    ],
+    "@typescript-eslint/no-dynamic-delete": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-extra-non-null-assertion": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "@typescript-eslint/no-duplicate-enum-values": "off",
+    "@typescript-eslint/semi": "warn",
+    "@typescript-eslint/typedef": "off"
   }
 }

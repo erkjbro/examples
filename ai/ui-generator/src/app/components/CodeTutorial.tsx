@@ -27,28 +27,30 @@ const CodeTutorial = () => {
                     name: 'code',
                     type: 'string',
                     description: 'Code to be generated',
-                    required: true,
+                    required: true
                 },
                 {
                     name: 'tutorial',
                     type: 'string',
                     description:
-                        'Markdown of step by step guide tutorial on how to use the generated code accompanied with the code. Include introduction, prerequisites and what happens at every step accompanied with code generated earlier. Don\'t forget to add how to render the code on browser.',
-                    required: true,
-                },
+                        'Markdown of step by step guide tutorial on how to use the generated code accompanied with the code. ' +
+                        'Include introduction, prerequisites and what happens at every step accompanied with code generated earlier. ' +
+                        'Don\'t forget to add how to render the code on browser.',
+                    required: true
+                }
             ],
             handler: async ({ code, tutorial }) => {
                 setCode((prev) => [...prev, code]);
                 setCodeToDisplay(code);
                 setCodeTutorial(tutorial);
-            },
+            }
         },
         [codeToDisplay, codeTutorial]
     );
 
     const changeHandler = (newCode: string) => {
         setCodeToDisplay(newCode);
-    }
+    };
 
     return (
         <main className=" min-h-screen px-4">
@@ -77,7 +79,7 @@ const CodeTutorial = () => {
                         enableLiveAutocompletion: true,
                         enableSnippets: false,
                         showLineNumbers: true,
-                        tabSize: 2,
+                        tabSize: 2
                     }}
                 />
             </div>
