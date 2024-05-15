@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import AceEditor from 'react-ace';
 import Markdown from 'react-markdown';
+import {
+    useCopilotAction,
+    useMakeCopilotReadable
+} from '@copilotkit/react-core';
 
 const CodeTutorial = () => {
     const [code, setCode] = useState<string[]>([
@@ -10,6 +14,37 @@ const CodeTutorial = () => {
     ]);
     const [codeToDisplay, setCodeToDisplay] = useState<string>(code[0] ?? '');
     const [codeTutorial, setCodeTutorial] = useState<string>('');
+    
+    useMakeCopilotReadable(codeToDisplay);
+
+    useCopilotAction(
+        {
+            name: 'generateCodeAndImplementationTutorial',
+            description:
+                'Create Code Snippet with React.js(Next.js), tailwindcss and an implementation tutorial of the code generated.',
+            parameters: [
+                {
+                    name: 'code',
+                    type: 'string',
+                    description: 'Code to be generated',
+                    required: true,
+                },
+                {
+                    name: 'tutorial',
+                    type: 'string',
+                    description:
+                        'Markdown of step by step guide tutorial on how to use the generated code accompanied with the code. Include introduction, prerequisites and what happens at every step accompanied with code generated earlier. Don\'t forget to add how to render the code on browser.',
+                    required: true,
+                },
+            ],
+            handler: async ({ code, tutorial }) => {
+                setCode((prev) => [...prev, code]);
+                setCodeToDisplay(code);
+                setCodeTutorial(tutorial);
+            },
+        },
+        [codeToDisplay, codeTutorial]
+    );
 
     const changeHandler = (newCode: string) => {
         setCodeToDisplay(newCode);
