@@ -1,3 +1,5 @@
 # Apps
 
-## [Meeting Summarizer](event-posting/README.md)
+## [Meeting Summarizer](chat-summarizer/README.md)
+
+## [UI Generator](ui-generator/README.md)
