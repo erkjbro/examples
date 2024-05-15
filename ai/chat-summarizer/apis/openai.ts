@@ -1,8 +1,9 @@
 import OpenAI from 'openai';
-import type { ChatCompletionMessageParam } from "openai/resources";
+// @ts-ignore
+import type { ChatCompletionMessageParam } from 'openai/resources';
 
 interface IOpenAIClient {
-    getChatSummary(messages: ChatCompletionMessageParam[]): Promise<string>;
+    getChatSummary(messages: ChatCompletionMessageParam[]): Promise<string | null>;
 }
 
 export class OpenAIClient implements IOpenAIClient {
