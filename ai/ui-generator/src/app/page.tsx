@@ -7,13 +7,13 @@ import { CodeTutorial, Header } from './components';
 const Home = () => (
     <>
         <Header />
-        <CopilotKit url="/api/copilot">
+        <CopilotKit url="/api/copilotkit">
             <CopilotSidebar
                 instructions="Help the user generate code. Ask the user if to generate its tutorial."
-                defaultOpen={true}
+                defaultOpen
                 labels={{
                     title: 'Code & Tutorial Generator',
-                    initial: 'Hi! 👋 I can help you generate code and a tutorial.',
+                    initial: 'Hi! 👋 I can help you generate code and its tutorial.'
                 }}>
                 <CodeTutorial />
             </CopilotSidebar>

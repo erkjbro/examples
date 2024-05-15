@@ -20,3 +20,8 @@ An AI-powered frontend UI components generator that enables you to generate Next
 ## Prerequisites
 
 Configure OPENAI_API_KEY.
+Configure TAVILY_API_KEY
+
+## Using the UI Generator
+
+Give a prompt like "Generate a contact form".

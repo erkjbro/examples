@@ -1,6 +1,7 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
+    "comma-dangle": ["warn", "never"],
     "trailing-commas": "off",
     "quotes": ["warn", "single"]
   }
